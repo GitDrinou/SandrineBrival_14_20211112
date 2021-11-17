@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import './sass/main.scss'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ROUTE_DASHBOARD, ROUTE_HOME } from './utils/constants'
+import Header from './components/common/Header'
+// import Footer from './components/common/Footer'
+import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
 
-function App() {
+function App() {  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <Router>
+         <div className="d-flex flex-column align-items-center w-100">
+            <Header />
+             <Routes>
+                 <Route exact path={ROUTE_HOME} element={<Home />}/>
+                 <Route exact path={ROUTE_DASHBOARD} element={<Dashboard />} />
+             </Routes>
+            {/* <Footer /> */}
+          </div> 
+          
+      </Router>
+  )
 }
 
-export default App;
+
+export default App
