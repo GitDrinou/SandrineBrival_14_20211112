@@ -1,6 +1,9 @@
 // ROUTES
 export const ROUTE_HOME = "/"
 export const ROUTE_DASHBOARD = "/dashboard"
+export const ROUTE_NEW_EMPLOYEE = "/new_employee"
+export const ROUTE_EMPLOYEES = "/employees"
+export const ROUTE_PARAMETERS = "/parameters"
 
 
 // localStorage

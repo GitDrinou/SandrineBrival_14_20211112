@@ -5,6 +5,7 @@ import { client } from "../../api/client"
 // initial state for Login
 const initialState = {
     userInfos: [],
+    rememberMe: [],
     status: 'idle',
     error: null,
     token: null
@@ -46,12 +47,18 @@ const loginSlice  = createSlice ({
     name: 'login',
     initialState,
     reducers: {
+        logRemember(state,action) {
+            state.rememberMe = {
+                email: action.payload.email,
+                password: action.payload.password,
+                isChecked: action.payload.remember
+            }
+        },
         logOut(state,action) {
             state.userInfos = []
             state.status = 'idle'
             state.userStatus = 'idle'
             state.token = null
-            sessionStorage.removeItem(localHRKey)
         }
     },
     extraReducers(builder){
@@ -63,12 +70,11 @@ const loginSlice  = createSlice ({
                 state.status= 'succeeded'
                 if(state.error !== null) state.error = null
                 state.token = 'Bearer'.concat(action.payload.body.token)
-                sessionStorage.setItem(localHRKey, 'Bearer'.concat(action.payload.body.token))
+                localStorage.setItem(localHRKey, 'Bearer'.concat(action.payload.body.token))
             })
             .addCase(fetchLogin.rejected, (state,action) => {
                 state.status = 'failed'
                 action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
-                sessionStorage.removeItem(localHRKey)
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
                 state.userStatus= 'succeeded'
@@ -83,6 +89,6 @@ const loginSlice  = createSlice ({
     }
 })
 
-export const { logOut } = loginSlice.actions
+export const { logRemember, logOut } = loginSlice.actions
 
 export default loginSlice.reducer

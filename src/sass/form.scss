@@ -1,0 +1,48 @@
+$enable-grid-classes: "off";
+
+.newemployee--header {
+    display: flex;
+    flex-direction: row;
+
+    & > i {
+        font-size: 1.6rem;
+        margin-right: 15px;
+        color: #5A7002;
+    }
+}
+
+.form-wrapper {
+    background: #E9E9E9;
+    padding: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+hr {
+    padding: 1px;
+    color: #666666;
+}
+
+.form--address {
+    font-size: 1.2rem;
+    font-family: 'Fjalla One', Arial, Helvetica, sans-serif;
+    border-bottom: 1px solid #0000;
+    padding-bottom: 5px;
+}
+
+.react-datepicker__input-container input {
+    border: 1px solid #CED4DA;
+    border-radius: 5px;    
+    font-family: 'Oxygen', Arial, Helvetica, sans-serif;    
+}
+
+.employee-pic {
+    margin-top: 20px;
+    opacity: 50%;
+    border-radius: 25px;
+    object-fit: cover;
+    height: 150px;
+    width: auto;
+}

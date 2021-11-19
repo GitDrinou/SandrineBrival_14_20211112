@@ -1,14 +1,10 @@
-import { localHRKey } from "../utils/constants" 
 
 export async function client(endpoint, method, body) {
 
-  const token = localStorage.getItem(localHRKey)
-  console.log(token)
-
   const headers = { 'Content-Type': 'application/json' }
   
-  if (token) {
-    headers.authorization = token
+  if (body.token) {
+    headers.authorization = body.token
   }
         
   const config = {
@@ -23,9 +19,6 @@ export async function client(endpoint, method, body) {
   }
   
   let data
-
-  console.log(endpoint)
-  console.log(config)
 
   try {
     const response = await fetch(endpoint, config)
