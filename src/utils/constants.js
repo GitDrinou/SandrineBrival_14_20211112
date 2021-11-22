@@ -8,6 +8,7 @@ export const ROUTE_PARAMETERS = "/parameters"
 
 // localStorage
 export const localHRKey = 'HRNetKey'
+export const localHRRemember = 'HRRememberChecked'
 
 // API URLs
 export const LOGIN_API = 'http://localhost:3001/api/v1/user/login'

@@ -1,10 +1,10 @@
 
-export async function client(endpoint, method, body) {
+export async function client(endpoint, method, body, token) {
 
   const headers = { 'Content-Type': 'application/json' }
   
-  if (body.token) {
-    headers.authorization = body.token
+  if (token) {
+    headers.authorization = token
   }
         
   const config = {
@@ -19,6 +19,7 @@ export async function client(endpoint, method, body) {
   }
   
   let data
+
 
   try {
     const response = await fetch(endpoint, config)

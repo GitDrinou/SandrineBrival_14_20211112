@@ -1,13 +1,26 @@
 import './sass/main.scss'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ROUTE_DASHBOARD, ROUTE_HOME, ROUTE_NEW_EMPLOYEE } from './utils/constants'
+import { localHRKey, ROUTE_DASHBOARD, ROUTE_HOME, ROUTE_NEW_EMPLOYEE } from './utils/constants'
 import Header from './components/common/Header'
 // import Footer from './components/common/Footer'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import NewEmployee from './pages/NewEmployee'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { fetchUser } from './store/slices/loginSlice'
 
 function App() {  
+
+  const localKey = localStorage.getItem(localHRKey)
+  const dispatch = useDispatch()
+
+   useEffect(() => {
+    if(localKey != null) {
+      dispatch(fetchUser(localKey))              
+    }
+  }, [localKey,dispatch])
+
 
   return (
       <Router>

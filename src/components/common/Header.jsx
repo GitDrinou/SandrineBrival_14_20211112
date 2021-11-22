@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import LogoIllustration from '../../assets/Logo_WealthHealth.svg'
-import { localHRKey, ROUTE_HOME } from '../../utils/constants'
+import { localHRKey, localHRRemember, ROUTE_HOME } from '../../utils/constants'
 import '../../sass/header.scss'
 import { logOut } from '../../store/slices/loginSlice'
 import { useSelector } from 'react-redux'
@@ -26,7 +26,7 @@ function Header() {
 
     // function to dispatch logOut reducer
     const handleSignOut = () => {        
-        dispatch(logOut())
+        dispatch(logOut({isRemember: JSON.parse(localStorage.getItem(localHRRemember))}))
     }
 
     return (

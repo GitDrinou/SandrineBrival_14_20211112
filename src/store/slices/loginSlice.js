@@ -5,7 +5,6 @@ import { client } from "../../api/client"
 // initial state for Login
 const initialState = {
     userInfos: [],
-    rememberMe: [],
     status: 'idle',
     error: null,
     token: null
@@ -32,7 +31,7 @@ export const fetchLogin = createAsyncThunk(
 export const fetchUser = createAsyncThunk(
     'login/fetchUser',
     async(userToken) => {
-        const response = await client(USER_API, 'POST', userToken)
+        const response = await client(USER_API, 'POST', '', userToken)
         return response.data
     }
 )
@@ -47,18 +46,17 @@ const loginSlice  = createSlice ({
     name: 'login',
     initialState,
     reducers: {
-        logRemember(state,action) {
-            state.rememberMe = {
-                email: action.payload.email,
-                password: action.payload.password,
-                isChecked: action.payload.remember
-            }
-        },
         logOut(state,action) {
-            state.userInfos = []
-            state.status = 'idle'
-            state.userStatus = 'idle'
-            state.token = null
+            if ( ! action.payload.isRemember) {
+                state.userInfos = []
+                state.status = 'idle'
+                state.userStatus = 'idle'
+                state.token = null
+            }
+            else {                
+                state.status = 'idle'
+                state.userStatus = 'idle'
+            }
         }
     },
     extraReducers(builder){
@@ -83,6 +81,7 @@ const loginSlice  = createSlice ({
                     email: action.payload.body.email,
                     firstName: action.payload.body.firstName,
                     lastName: action.payload.body.lastName,
+                    password: action.payload.body.password,
                     id: action.payload.body.id
                 }
             })  
