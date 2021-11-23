@@ -2,11 +2,30 @@ import ReactDatePicker from 'react-datepicker'
 import { useState } from 'react'
 import "react-datepicker/dist/react-datepicker.css"
 import '../../sass/form.scss'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchDepartments, fetchStates } from '../../store/slices/employeeSlice'
+import Select from 'react-select'
+import { formatDataForSelect } from '../../utils/functions'
 
 function EmployeeForm() {
 
     const [startDate, setStartDate] = useState('');
     const [birthDate, setBirthDate] = useState(new Date())
+
+    const dispatch = useDispatch()
+
+    const states = useSelector(state => state.employee.statesList)
+    const departments = useSelector(state => state.employee.departmentsList)
+
+    useEffect(() => {
+        dispatch(fetchStates())
+        dispatch(fetchDepartments())
+    },[dispatch])
+    
+    const newStates = formatDataForSelect(states)
+
+    const newDepartments = formatDataForSelect(departments) 
 
     return (
         <div className="form-wrapper">
@@ -52,8 +71,7 @@ function EmployeeForm() {
                         <div className="row mb-3">
                             <div className="col-lg-6 col-12">
                                 <label htmlFor="state" className="form-label">state</label>
-                                {/* state Component */}
-                                <span><br />** State component **</span>
+                                <Select options={newStates} />
                             </div>                    
                         </div>                       
                     </div>
@@ -65,12 +83,11 @@ function EmployeeForm() {
                     </div>
                     <div className="col-lg-6 col-12">
                         <label htmlFor="department" className="form-label">Department</label>
-                        {/* Department Component */}
-                        <span><br />** Department component **</span>
+                        <Select options={newDepartments} />
                     </div>
                 </div>
-                <div className="row mb-3 mt-5">
-                    <button type="button" className="btn btn-dark">Save</button>
+                <div className="row mb-3 mt-3">
+                    <button type="button" className="btn btn-secondary p-3">Save</button>
                 </div>
             </form>
         </div>
