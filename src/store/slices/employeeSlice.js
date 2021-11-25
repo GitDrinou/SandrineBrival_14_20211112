@@ -1,12 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { client } from "../../api/client"
-import { DEPT_API, STATES_API } from "../../utils/constants"
+import { DEPT_API, localHRKey, NEW_EMPLOYEE_API, STATES_API } from "../../utils/constants"
+
+const localKey = localStorage.getItem(localHRKey)
 
 // initial State for Employee
 const initialState = {
     statesList: [],
     departmentsList: [],
     employees: [],
+    creationStatus: 'idle',
     status: 'idle',
     error: null,
     token: null
@@ -37,6 +40,33 @@ export const fetchDepartments = createAsyncThunk(
         return response.data
     }
 )
+
+
+/**
+ * @constant createEmployee
+ * function createAsyncThunk (action type, async function returning a promise)
+ * @returns creation of a new employee
+*/
+export const createEmployee = createAsyncThunk(
+    'employee/createEmployee',
+    async(datas) => {
+        const body = {
+            "firstName": datas.firstName,
+            "lastName": datas.lastName,
+            "birthDate": datas.birthDate,
+            "startDate": datas.startDate,
+            "street": datas.street,
+            "city": datas.city,
+            "state": datas.selectedState,
+            "zipCode": datas.zipCode,
+            "department": datas.selectedDepartment
+        }
+        const response = await client(NEW_EMPLOYEE_API, 'POST', body, localKey)
+        console.log(response.data)
+        return response.data
+    }
+)
+
 
 /**
  * @constant employeeSlice
@@ -72,6 +102,18 @@ const employeeSlice = createSlice ({
             })
             .addCase(fetchDepartments.rejected, (state, action) => {
                 state.sattus = 'rejected'
+                action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
+            })
+            .addCase(createEmployee.pending, (state, action) => {
+                state.creationStatus = 'loading'
+            })
+            .addCase(createEmployee.fulfilled, (state, action) => {
+                state.creationStatus = 'succeeded'
+                if(state.error !== null) state.error = null
+                state.employees = state.employees.concat(action.payload.body)
+            })
+            .addCase(createEmployee.rejected, (state, action) => {
+                state.creationStatus = 'rejected'
                 action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
             })
     }

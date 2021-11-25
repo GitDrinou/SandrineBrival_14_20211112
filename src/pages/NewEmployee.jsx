@@ -9,9 +9,13 @@ function NewEmployee() {
     return (
 
         <div className="container w-100 p-3">
-            <div className="row mb-2 w-100">
-                <div className="col d-flex align-items-center">
-                    <i className="fas fa-angle-left icoBack" title="Go to dashboard" onClick={() => navigate(-1)}></i>
+            <div className="row mb-2">
+                <div className="col d-flex justify-content-end">
+                    <span className="icoBack" onClick={() => navigate(-1)}>
+                        <i className="fas fa-angle-left" title="Go to dashboard"></i>
+                        return
+                    </span>
+                    
                 </div>
             </div>
             <div className="row">
