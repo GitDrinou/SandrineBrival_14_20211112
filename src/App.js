@@ -1,6 +1,6 @@
 import './sass/main.scss'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { localHRKey, ROUTE_DASHBOARD, ROUTE_HOME, ROUTE_NEW_EMPLOYEE } from './utils/constants'
+import { localHRKey, ROUTE_DASHBOARD, ROUTE_EMPLOYEES, ROUTE_HOME, ROUTE_NEW_EMPLOYEE } from './utils/constants'
 import Header from './components/common/Header'
 // import Footer from './components/common/Footer'
 import Home from './pages/Home'
@@ -9,13 +9,14 @@ import NewEmployee from './pages/NewEmployee'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchUser } from './store/slices/loginSlice'
+import Employees from './pages/Employees'
 
 function App() {  
 
   const localKey = localStorage.getItem(localHRKey)
   const dispatch = useDispatch()
 
-   useEffect(() => {
+  useEffect(() => {
     if(localKey != null) {
       dispatch(fetchUser(localKey))              
     }
@@ -29,7 +30,8 @@ function App() {
              <Routes>
                  <Route exact path={ROUTE_HOME} element={<Home />}/>
                  <Route exact path={ROUTE_DASHBOARD} element={<Dashboard />} />
-                 <Route exact path={ROUTE_NEW_EMPLOYEE} element={<NewEmployee />} />
+                 <Route exact path={ROUTE_NEW_EMPLOYEE} element={<NewEmployee />} />                 
+                 <Route exact path={ROUTE_EMPLOYEES} element={<Employees />} />
              </Routes>
             {/* <Footer /> */}
           </div> 

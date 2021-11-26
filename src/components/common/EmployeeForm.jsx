@@ -6,7 +6,9 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchDepartments, fetchStates, createEmployee } from '../../store/slices/employeeSlice'
 import Select from 'react-select'
-import { formatDataForSelect } from '../../utils/functions'
+import { formatDataForSelect, modaleEvents } from '../../utils/functions'
+import { ROUTE_DASHBOARD } from '../../utils/constants'
+import Modale from '../Modale'
 
 function EmployeeForm() {
 
@@ -26,11 +28,15 @@ function EmployeeForm() {
     const departments = useSelector(state => state.employee.departmentsList)
 
     const creationStatus = useSelector(state => state.employee.creationStatus)
+    const btnOpenModale = document.querySelector('[aria-haspopup="dialog"]')
 
     useEffect(() => {
         dispatch(fetchStates())
         dispatch(fetchDepartments())
-    },[dispatch])
+        if(creationStatus === "succeeded") {        
+            modaleEvents(btnOpenModale, ROUTE_DASHBOARD)
+        }       
+    },[dispatch, creationStatus, btnOpenModale])
     
     const newStates = formatDataForSelect(states)
 
@@ -53,13 +59,13 @@ function EmployeeForm() {
         e.preventDefault()       
         if (canSave) {
             dispatch(createEmployee({firstName, lastName, birthDate, street, city, zipCode, selectedState, startDate, selectedDepartment}))
-        }
+        }        
     }
 
-
     return (
-        <div className="form-wrapper">
-            <form id="frmEmployee">
+        <div className="form-wrapper js-page">            
+            <Modale />
+            <form id="frmEmployee" className="js-document">
                 <div className="row">
                     <div className="col-lg-6 col-12">
                         <div className="row mb-2">
@@ -117,7 +123,7 @@ function EmployeeForm() {
                     </div>
                 </div>
                 <div className="row mb-3 mt-3">
-                    <button type="button" className="btn btn-secondary p-3" onClick={handleSubmitForm}>Save</button>
+                    <button type="button" className="btn btn-secondary p-3" onClick={handleSubmitForm} aria-haspopup="dialog" aria-controls="dialog">Save</button>
                 </div>
             </form>
         </div>

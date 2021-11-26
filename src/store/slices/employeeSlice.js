@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { client } from "../../api/client"
-import { DEPT_API, localHRKey, NEW_EMPLOYEE_API, STATES_API } from "../../utils/constants"
+import { DEPT_API, EMPLOYEES_API, localHRKey, NEW_EMPLOYEE_API, STATES_API } from "../../utils/constants"
 
 const localKey = localStorage.getItem(localHRKey)
 
@@ -62,11 +62,22 @@ export const createEmployee = createAsyncThunk(
             "department": datas.selectedDepartment
         }
         const response = await client(NEW_EMPLOYEE_API, 'POST', body, localKey)
-        console.log(response.data)
         return response.data
     }
 )
 
+/**
+ * @constant fetchEmployees
+ * function createAsyncThunk (action type, async function returning a promise)
+ * @returns all employees
+*/
+export const fetchEmployees = createAsyncThunk(
+    'employee/fetchEmployees',
+    async() => {
+        const response = await client(EMPLOYEES_API, 'GET', '', '')
+        return response.data
+    }
+)
 
 /**
  * @constant employeeSlice
@@ -114,6 +125,18 @@ const employeeSlice = createSlice ({
             })
             .addCase(createEmployee.rejected, (state, action) => {
                 state.creationStatus = 'rejected'
+                action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
+            })
+            .addCase(fetchEmployees.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(fetchEmployees.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                if(state.error !== null) state.error = null
+                state.employees = action.payload.body
+            })
+            .addCase(fetchEmployees.rejected, (state, action) => {
+                state.sattus = 'rejected'
                 action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
             })
     }

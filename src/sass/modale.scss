@@ -1,0 +1,45 @@
+// dialog overlay
+.c-dialog {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  padding: 2.4rem;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  background-color: rgba(black, .75);
+  transition: .2s;         
+}
+  
+.c-dialog__box {
+  flex: 1;
+  max-width: 48rem;
+  margin: auto;
+  padding: 2.4rem;
+  background-color: white;
+  font-family: 'Fjalla One', Arial, Helvetica, sans-serif;
+  border-radius: 20px;
+  position: relative;
+}
+
+  
+.btnClose {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-weight: 700;
+  font-family: 'Oxygen', Arial, Helvetica, sans-serif;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  background: #666666;
+  font-size: 0.8rem;
+  color: #FFFFFF;
+}
+
+.c-dialog[aria-hidden="true"] {
+  visibility: hidden;
+  opacity: 0;
+}

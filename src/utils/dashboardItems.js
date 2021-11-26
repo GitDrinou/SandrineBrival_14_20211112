@@ -3,14 +3,14 @@ export const dashboardItems = [
         id: 1,
         icon: "fas fa-user-plus",
         title: "Create employee",
-        description: "Register a new employee by filling a form.",
+        description: "Fill the form to create a new employee",
         route: "/new_employee"
     },
     {
         id: 2,
         icon: "fas fa-address-book",
         title: "Current employees",
-        description: "View current employees and access an employee's file to update data.",
+        description: "View all employees / Update an employee",
         route: "/employees"
     },
     {
