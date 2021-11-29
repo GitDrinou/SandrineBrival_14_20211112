@@ -20,7 +20,6 @@ export async function client(endpoint, method, body, token) {
   
   let data
 
-
   try {
     const response = await fetch(endpoint, config)
     data = await response.json()

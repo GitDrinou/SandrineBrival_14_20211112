@@ -50,3 +50,16 @@ export function formatDate(value) {
 
     return (date.getMonth() + 1) + "/" +date.getDate()  + "/" + date.getFullYear()
 }
+
+export function sortedDatas(array, column) {
+
+    const newArray = array.sort(function compare(a, b) {
+        if (a[column] < b[column])
+            return -1;
+        if (a[column] > b[column] )
+            return 1;
+        return 0;
+    })
+
+    return newArray
+}

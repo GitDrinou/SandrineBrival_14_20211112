@@ -1,10 +1,15 @@
-.employees--header {
-    display: flex;
-    flex-direction: row;
+.tbl {
+    font-size: 1rem;
+}
 
-    & > i {
-        font-size: 1.6rem;
-        margin-right: 15px;
-        color: #5A7002;
+.tbl-header {
+    cursor:pointer;
+    display: block;
+}
+
+.fa-eye {
+    font-size: 1rem;
+    &:hover {
+        color: green;
     }
 }

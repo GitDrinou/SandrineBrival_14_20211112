@@ -10,18 +10,19 @@ import { formatDataForSelect, modaleEvents } from '../../utils/functions'
 import { ROUTE_DASHBOARD } from '../../utils/constants'
 import Modale from '../Modale'
 
-function EmployeeForm() {
-
+function EmployeeForm({data}) {
+  
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [birthDate, setBirthDate] = useState('')
     const [street, setStreet] = useState('')
     const [city, setCity] = useState('')
     const [zipCode, setZipCode] = useState('')
-        const [selectedState, setSelectedState] = useState('')
+    const [selectedState, setSelectedState] = useState('')
     const [startDate, setStartDate] = useState('')
     const [selectedDepartment, setSelectedDepartment] = useState('')
-
+    //const [readOnly, setReadOnly] = useState(false)
+    
     const dispatch = useDispatch()
 
     const states = useSelector(state => state.employee.statesList)
@@ -29,8 +30,8 @@ function EmployeeForm() {
 
     const creationStatus = useSelector(state => state.employee.creationStatus)
     const btnOpenModale = document.querySelector('[aria-haspopup="dialog"]')
-
-    useEffect(() => {
+    
+    useEffect(() => {        
         dispatch(fetchStates())
         dispatch(fetchDepartments())
         if(creationStatus === "succeeded") {        
@@ -39,7 +40,6 @@ function EmployeeForm() {
     },[dispatch, creationStatus, btnOpenModale])
     
     const newStates = formatDataForSelect(states)
-
     const newDepartments = formatDataForSelect(departments) 
 
     // Change events
@@ -52,7 +52,7 @@ function EmployeeForm() {
     const onAdrStateChanged = (e) => setSelectedState(e.value)
     const onStartDateChanged = (date) => setStartDate(date)
     const onDepartmentChanged = (e) => setSelectedDepartment(e.value)   
-    
+
     const canSave =  [firstName, lastName, birthDate, startDate, selectedDepartment].every(Boolean)
 
     const handleSubmitForm = (e) => {
@@ -60,6 +60,10 @@ function EmployeeForm() {
         if (canSave) {
             dispatch(createEmployee({firstName, lastName, birthDate, street, city, zipCode, selectedState, startDate, selectedDepartment}))
         }        
+    }
+
+    if (data) {
+        console.log(data.firstName)
     }
 
     return (
@@ -71,7 +75,7 @@ function EmployeeForm() {
                         <div className="row mb-2">
                             <div className="col">
                                 <label htmlFor="firstname" className="form-label">First Name</label>
-                                <input type="text" id="firstname" className="form-control" onChange={onFirstNameChanged} aria-label="First name"/>
+                                <input type="text" id="firstname" value={firstName} className="form-control" onChange={onFirstNameChanged}aria-label="First name"/>
                             </div>
                         </div>
                         <div className="row mb-2">                    

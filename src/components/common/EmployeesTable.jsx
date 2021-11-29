@@ -1,44 +1,53 @@
-import { formatDate } from '../../utils/functions'
+import { formatDate, sortedDatas } from '../../utils/functions'
+import '../../sass/employees.scss'
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 function EmployeesTable(props) {
     
-    const employeesToOrder = [...props.employees]
+    const employees = [...props.employees]
+    const [sortedBy, setSortedBy] = useState('lastName')
 
-    const employeesOrderByDefault = employeesToOrder.sort(function compare(a, b) {
-        if (a.lastName < b.lastName)
-           return -1;
-        if (a.lastName > b.lastName )
-           return 1;
-        return 0;
-      });
+    const navigate = useNavigate()
 
-      console.log(employeesOrderByDefault)
+    let defaultSorted = sortedDatas(employees, sortedBy) 
+    
+    const handleSortTable = (e) => { 
+        e.preventDefault()
+        let eltClicked = e.target.id
+        setSortedBy(eltClicked.split('_')[1])
+    }
+
+    const handleClickViewDetails = (e) => {
+        e.preventDefault()
+        navigate(`/employee/${e.target.id}`)
+    }
 
     return (
         <div className="table-responsive">
-            <table className="table table-hover">
+            <table className="table table-hover tbl">
                 <thead>
                     <tr>
                         <th scope="col">
-                            <div className="d-flex justify-content-between">
+                            <div className="d-flex justify-content-between tbl-header" id="div_lastName" onClick={handleSortTable}>
                                 <span>Last Name</span>
                                 <span className="float-right"><i className="fas fa-sort"></i></span>
                             </div>                        
                         </th>
                         <th scope="col">
-                            <div className="d-flex justify-content-between">
+                            <div className="d-flex justify-content-between tbl-header" id="div_firstName" onClick={handleSortTable}>
                                 <span>First Name</span>
                                 <span className="float-right"><i className="fas fa-sort"></i></span>
                             </div>
                         </th>
                         <th scope="col">
-                            <div className="d-flex justify-content-between">
+                            <div className="d-flex justify-content-between tbl-header" id="div_startDate" onClick={handleSortTable}>
                                 <span>Start Date</span>
                                 <span className="float-right"><i className="fas fa-sort"></i></span>
                             </div>
                         </th>
                         <th scope="col">
-                            <div className="d-flex justify-content-between">
+                            <div className="d-flex justify-content-between tbl-header" id="div_department" onClick={handleSortTable}>
                                 <span>Department</span>
                                 <span className="float-right"><i className="fas fa-sort"></i></span>
                             </div>
@@ -47,13 +56,13 @@ function EmployeesTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    { employeesOrderByDefault && employeesOrderByDefault.map((emp, index) => (
+                    { defaultSorted && defaultSorted.map((emp, index) => (
                         <tr key={`empl-${index}`}>
                             <th scope="row">{emp.lastName}</th>
                             <td>{emp.firstName}</td>
                             <td>{formatDate(emp.startDate)}</td>
                             <td>{emp.department}</td>                        
-                            <td><i className="fas fa-eye"></i></td>
+                            <td><i className="fas fa-eye" title="View more..." id={emp._id} onClick={handleClickViewDetails}></i></td>
                         </tr>
                     ))}                
                 </tbody>

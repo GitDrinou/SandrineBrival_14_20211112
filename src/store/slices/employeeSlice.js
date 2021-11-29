@@ -9,6 +9,7 @@ const initialState = {
     statesList: [],
     departmentsList: [],
     employees: [],
+    employee_details: [],
     creationStatus: 'idle',
     status: 'idle',
     error: null,
@@ -80,6 +81,19 @@ export const fetchEmployees = createAsyncThunk(
 )
 
 /**
+ * @constant fetchEmployee
+ * function createAsyncThunk (action type, async function returning a promise)
+ * @returns specific employee
+*/
+export const fetchEmployee = createAsyncThunk(
+    'employee/fetchEmployee',
+    async(employeeId) => {
+        const response = await client(EMPLOYEES_API, 'POST', employeeId, '')
+        return response.data
+    }
+)
+
+/**
  * @constant employeeSlice
  * function createSlice is a function that accepts : initial state, slice name, reducers functions, 
  * which generate actions creators and actions types - Redux Toolkit
@@ -136,6 +150,18 @@ const employeeSlice = createSlice ({
                 state.employees = action.payload.body
             })
             .addCase(fetchEmployees.rejected, (state, action) => {
+                state.sattus = 'rejected'
+                action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
+            })
+            .addCase(fetchEmployee.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(fetchEmployee.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                if(state.error !== null) state.error = null
+                state.employee_details = action.payload.body
+            })
+            .addCase(fetchEmployee.rejected, (state, action) => {
                 state.sattus = 'rejected'
                 action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
             })
