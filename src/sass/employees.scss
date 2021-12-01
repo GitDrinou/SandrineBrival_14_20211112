@@ -1,10 +1,21 @@
+.employees--header {
+    display: flex;
+    flex-direction: row;
+
+    & > i {
+        font-size: 1.6rem;
+        margin-right: 15px;
+        color: #5A7002;
+    }
+}
+
 .tbl {
     font-size: 1rem;
 }
 
 .tbl-header {
-    cursor:pointer;
     display: block;
+    cursor:pointer;
 }
 
 .fa-eye {
@@ -12,4 +23,18 @@
     &:hover {
         color: green;
     }
+}
+
+.details-label {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.details-value {
+    font-size: 1rem;
+}
+
+.sel-numberItems {
+    font-size: 0.9rem;
+    font-family: 'Oxygen', Arial, Helvetica, sans-serif;
 }

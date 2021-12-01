@@ -6,15 +6,18 @@ import { useNavigate } from 'react-router'
 function EmployeesTable(props) {
     
     const employees = [...props.employees]
+    const [oldSortedBy, setOldSprtedBy] = useState('')
     const [sortedBy, setSortedBy] = useState('lastName')
 
     const navigate = useNavigate()
 
-    let defaultSorted = sortedDatas(employees, sortedBy) 
+    let defaultSorted = sortedDatas(employees, oldSortedBy, sortedBy) 
     
     const handleSortTable = (e) => { 
         e.preventDefault()
         let eltClicked = e.target.id
+        console.log(eltClicked)
+        sortedBy === oldSortedBy ? setOldSprtedBy('') : setOldSprtedBy(sortedBy)
         setSortedBy(eltClicked.split('_')[1])
     }
 
@@ -22,6 +25,8 @@ function EmployeesTable(props) {
         e.preventDefault()
         navigate(`/employee/${e.target.id}`)
     }
+
+    //console.log(defaultSorted)
 
     return (
         <div className="table-responsive">
@@ -58,7 +63,7 @@ function EmployeesTable(props) {
                 <tbody>
                     { defaultSorted && defaultSorted.map((emp, index) => (
                         <tr key={`empl-${index}`}>
-                            <th scope="row">{emp.lastName}</th>
+                            <td>{emp.lastName}</td>
                             <td>{emp.firstName}</td>
                             <td>{formatDate(emp.startDate)}</td>
                             <td>{emp.department}</td>                        

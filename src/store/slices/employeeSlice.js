@@ -150,7 +150,7 @@ const employeeSlice = createSlice ({
                 state.employees = action.payload.body
             })
             .addCase(fetchEmployees.rejected, (state, action) => {
-                state.sattus = 'rejected'
+                state.status = 'rejected'
                 action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
             })
             .addCase(fetchEmployee.pending, (state, action) => {
@@ -159,7 +159,18 @@ const employeeSlice = createSlice ({
             .addCase(fetchEmployee.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 if(state.error !== null) state.error = null
-                state.employee_details = action.payload.body
+                state.employee_details = {
+                    "id": action.payload.body._id,
+                    "firstName":  action.payload.body.firstName,
+                    "lastName":  action.payload.body.lastName,
+                    "birthDate":  action.payload.body.birthDate,
+                    "startDate":  action.payload.body.startDate,
+                    "street":  action.payload.body.street,
+                    "city":  action.payload.body.city,
+                    "state":  action.payload.body.state,
+                    "zipCode":  action.payload.body.zipCode,
+                    "department":  action.payload.body.department
+                }
             })
             .addCase(fetchEmployee.rejected, (state, action) => {
                 state.sattus = 'rejected'

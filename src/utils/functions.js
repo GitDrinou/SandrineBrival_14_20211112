@@ -46,20 +46,30 @@ export function modaleEvents(elt, url_return) {
 
 export function formatDate(value) {
 
-    const date = new Date(value)
-
-    return (date.getMonth() + 1) + "/" +date.getDate()  + "/" + date.getFullYear()
+    const date = new Date(value)  
+    return (date.getMonth() + 1) + "/" + date.getDate()  + "/" + date.getFullYear()
 }
 
-export function sortedDatas(array, column) {
-
-    const newArray = array.sort(function compare(a, b) {
-        if (a[column] < b[column])
-            return -1;
-        if (a[column] > b[column] )
-            return 1;
-        return 0;
-    })
+export function sortedDatas(array, oldColumn, newColumn) {
+    
+    let newArray = []
+    if (oldColumn === '' || oldColumn !== newColumn) {
+        newArray = array.sort(function compare(a, b) {
+            if (a[newColumn] < b[newColumn])
+                return -1
+            if (a[newColumn] > b[newColumn] )
+                return 1
+            return 0        
+        })
+    } else if (oldColumn === newColumn) {
+        newArray = array.sort(function compare(a, b) {
+            if (b[newColumn] < a[newColumn])
+                return -1
+            if (b[newColumn] > a[newColumn] )
+                return 1
+            return 0        
+        })
+    }
 
     return newArray
 }
