@@ -47,12 +47,22 @@
     border-top: 2px solid #000000;
 }
 
-.fa-caret-left, .fa-caret-right {
-    font-size: 1.5rem;
+.fa-chevron-left, .fa-chevron-right, .fa-step-backward, .fa-step-forward {
+    font-size: 1.1rem;
     padding: 0 10px;
     color: #ABABAB;
 
     &:hover {
         color: #198754;
+    }
+}
+
+.btnPage {
+    font-size: 1.1rem;
+    color: #ABABAB;
+    border: none;
+    &:hover {
+        background: #198754;
+        color: #FFFFFF;
     }
 }
