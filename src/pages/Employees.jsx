@@ -5,6 +5,10 @@ import EmployeesTable from "../components/common/EmployeesTable"
 import { fetchEmployees } from "../store/slices/employeeSlice"
 import '../sass/employees.scss'
 
+/**
+ * Component function : Employees List
+ * @returns employees list
+ */
 function EmployeesList() {
 
     const dispatch = useDispatch()

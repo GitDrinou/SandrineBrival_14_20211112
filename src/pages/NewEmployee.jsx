@@ -2,12 +2,16 @@ import '../sass/form.scss'
 import EmployeeForm from "../components/common/EmployeeForm"
 import { useNavigate } from 'react-router'
 
+/**
+ * Component function : New employee
+ * @returns the employee's creation form
+ */
 function NewEmployee() {
 
+    // constant
     const navigate = useNavigate()
 
     return (
-
         <div className="container w-100 p-3">
             <div className="row mb-2">
                 <div className="col d-flex justify-content-end">

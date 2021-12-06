@@ -68,3 +68,15 @@ hr {
         opacity: 100%;
     }
 }
+
+.btnUpdate {
+    font-weight: 700;
+}
+
+.errorMsg {
+    background: rgb(179, 8, 8);
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+}

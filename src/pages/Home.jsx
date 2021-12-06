@@ -2,6 +2,10 @@ import '../sass/home.scss'
 import HRIllustration from '../assets/human-resources-g2478e1e66_1280.png'
 import Login from './Login'
 
+/**
+ * Component function : Home
+ * @returns the login form for user admin connection
+ */
 function Home() {
 
     return (

@@ -1,6 +1,9 @@
 import '../sass/modale.scss'
 
-
+/**
+ * Component function : Modale
+ * @returns a modale to display the successful action
+ */
 const Modale = () => {
 
     return(

@@ -1,4 +1,13 @@
 
+/**
+ * Connextion to the API
+ * @param {string} endpoint API endpoint with server url
+ * @param {string} method API method (GET, POST, PUT...)
+ * @param {object} body contain all datas sent by the redux store reducer
+ * @param {string} token secure key 
+ * @returns API server response
+ */
+
 export async function client(endpoint, method, body, token) {
 
   const headers = { 'Content-Type': 'application/json' }

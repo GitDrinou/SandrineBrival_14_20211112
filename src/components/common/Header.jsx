@@ -8,16 +8,26 @@ import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 
+/**
+ * Component function : Header
+ * @returns the header of the site
+ */
 function Header() {
     
+    // constants
     const dispatch = useDispatch()
+    const location = useLocation()
+
+    // local state
     const [token, setToken] = useState('')
 
+    // selector
     const stateToken = useSelector(state => state.login.token)    
+
+    // initialized secure key
     const isSignOut = stateToken === null ? token : stateToken
 
-    const location = useLocation()
-  
+    // on page load
     useEffect(() => {
         if (!isSignOut && location.pathname !== ROUTE_HOME) {
             setToken(localStorage.getItem(localHRKey))

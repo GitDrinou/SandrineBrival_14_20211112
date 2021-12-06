@@ -11,6 +11,7 @@ const initialState = {
     employees: [],
     employee_details: [],
     creationStatus: 'idle',
+    updateStatus: 'idle',
     status: 'idle',
     error: null,
     token: null
@@ -89,6 +90,28 @@ export const fetchEmployee = createAsyncThunk(
     'employee/fetchEmployee',
     async(employeeId) => {
         const response = await client(EMPLOYEES_API, 'POST', employeeId, '')
+        return response.data
+    }
+)
+
+/**
+ * @constant updateEmployee
+ * function createAsyncThunk (action type, async function returning a promise)
+ * @returns the confirmation or not of updating employee
+*/
+export const updateEmployee = createAsyncThunk(
+    'employee/updateEmployee',
+    async(updateDatas, employeeId) => {
+        const body = {
+            id: updateDatas.employeeId,
+            lastName: updateDatas.vLastName,
+            street: updateDatas.vStreet,
+            city: updateDatas.vCity,
+            zipCode: updateDatas.vZipCode,
+            state: updateDatas.vSelState,
+            department: updateDatas.vSelDept
+        }
+        const response = await client(EMPLOYEES_API, 'PUT', body, '')
         return response.data
     }
 )
@@ -174,6 +197,17 @@ const employeeSlice = createSlice ({
             })
             .addCase(fetchEmployee.rejected, (state, action) => {
                 state.sattus = 'rejected'
+                action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
+            })            
+            .addCase(updateEmployee.pending, (state, action) => {
+                state.updateStatus = 'loading'
+            })
+            .addCase(updateEmployee.fulfilled, (state, action) => {
+                state.updateStatus = 'succeeded'
+                if(state.error !== null) state.error = null
+            })
+            .addCase(updateEmployee.rejected, (state, action) => {
+                state.updateStatus = 'rejected'
                 action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
             })
     }

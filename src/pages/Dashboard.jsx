@@ -2,6 +2,10 @@ import { dashboardItems } from '../utils/dashboardItems'
 import { Link } from 'react-router-dom'
 import '../sass/dashboard.scss'
 
+/**
+ * Component function : Dashboard
+ * @returns a list of admin actions
+ */
 function Dashboard() {
     return (
         <div className="container mt-3 w-100 p-3">

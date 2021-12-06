@@ -1,3 +1,4 @@
+// dashboard items array
 export const dashboardItems = [
     {
         id: 1,
@@ -12,12 +13,5 @@ export const dashboardItems = [
         title: "Current employees",
         description: "View all employees / Update an employee",
         route: "/employees"
-    },
-    {
-        id: 3,
-        icon: "fas fa-cogs",
-        title: "Parameters",
-        description: "Update your informations",
-        route: "/parameters"
     }
 ]

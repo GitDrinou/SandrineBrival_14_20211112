@@ -5,17 +5,23 @@ import { useNavigate, useParams } from "react-router"
 import { fetchEmployee } from "../store/slices/employeeSlice"
 import EmployeeForm from "./common/EmployeeForm"
 
+/**
+ * Component function : Employee Details
+ * @returns the employee detals using the employee form component
+ */
 function EmployeeDetails() {
 
+    // constants
     const idEmployee = useParams()
-
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    // on page load
     useEffect(() => {
         dispatch(fetchEmployee(idEmployee))
     }, [dispatch, idEmployee])
 
+    // selector
     const employee = useSelector(state => state.employee.employee_details)
         
     return (

@@ -5,28 +5,29 @@ import { fetchLogin } from '../store/slices/loginSlice'
 import { localHRKey, localHRRemember, ROUTE_DASHBOARD } from '../utils/constants'
 import { useNavigate } from 'react-router'
 
+/**
+ * Component function : Login
+ * @returns login form for connection
+ */
+function Login() {
 
-function Login(props) {
-
+    // variable && constants
     let errorMessage
-
     const navigate = useNavigate()
-
     const dispatch = useDispatch() 
     
-       
+    // login selectors
     const loginStatus = useSelector(state => state.login.status)
     const loginError = useSelector(state => state.login.error)
-
     const userEmail = useSelector(state => state.login.userInfos.email)
     const userPassword = useSelector(state => state.login.userInfos.password)    
     
-    
+    // local state
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [rememberCheck, setRememberCheck] = useState(false)
      
-    // Redirect to Dashboard page if credentials are authorized
+    // on page load : Redirect to Dashboard page if credentials are authorized
     useEffect(() => { 
         if (localStorage.getItem(localHRRemember) !== null) {
             document.getElementById('emailUser').value = userEmail
@@ -38,13 +39,16 @@ function Login(props) {
         }
     }, [userEmail, userPassword, loginStatus,navigate])
 
+    // condition if login failed > display an error
     if (loginStatus === 'failed') {
         errorMessage = <span className="error-message"> {loginError} </span>
     }
 
+    // Events change inputs login
     const onEmailChanged = (e) => { setEmail(e.target.value) }
     const onPasswordChanged = (e) => { setPassword(e.target.value) }
 
+    // Event change on Remember checkbox
     const onRememberChanged = (e) => {
         let valCheck = e.target.checked
         if (valCheck === true) {  
@@ -56,7 +60,7 @@ function Login(props) {
         }
     }
 
-    // Event on submit
+    // Event on submit button
     const onSubmitClicked = () => {
         let valEmail, valPassword
         valEmail = (email === '') ? userEmail : email

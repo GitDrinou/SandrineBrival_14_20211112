@@ -5,36 +5,43 @@ import { useNavigate } from 'react-router'
 import Select from 'react-select'
 import { numberOfItems } from '../../utils/constants'
 
+/**
+ * Component function : Employee Table
+ * @param {object} props employees datas
+ * @returns a data table list of employees with filters and pagination
+ */
 function EmployeesTable(props) {
-    
-    const employees = [...props.employees]
 
+    // variables && constant
     let employeesDisplayed = []
     let numberPages = []
-
-    const [oldSortedBy, setOldSprtedBy] = useState('')
-    const [sortedBy, setSortedBy] = useState('lastName')
-
     const navigate = useNavigate()
 
-    let defaultSorted = sortedDatas(employees, oldSortedBy, sortedBy) 
-    
+    const employees = [...props.employees]
+
+    // local state
+    const [oldSortedBy, setOldSprtedBy] = useState('')
+    const [sortedBy, setSortedBy] = useState('lastName') 
     const [firstItem, setFirstItem] = useState(0)
     const [valSearch, setValSearch] = useState('')
-    const [tmpEmployees, setTmpEmployees] = useState([])
-
+    const [tmpEmployees, setTmpEmployees] = useState([])   
     const [defaultNumberItems, setDefaultNumberItems] = useState(numberOfItems[0].value)
+
+    // employees list sorted by...
+    let defaultSorted = sortedDatas(employees, oldSortedBy, sortedBy)         
     
+    // tables length
     const lenSortedEmployees = defaultSorted.length
     const lenTmpEmployees = tmpEmployees.length
-
     let lenEmployeesFiltered = parseInt(defaultNumberItems) > defaultNumberItems ? defaultNumberItems : lenTmpEmployees
-    let totalPage = Math.ceil(lenSortedEmployees / parseInt(defaultNumberItems))
 
+    // number of pages 
+    let totalPage = Math.ceil(lenSortedEmployees / parseInt(defaultNumberItems))
     for (let i=1; i <=totalPage; i++) { 
         numberPages.push(i) 
     }
 
+    // condition if search input is filled or not with a minimum of 3 characters
     if (valSearch.length < 3) {
         for (let i in defaultSorted) {
             let index = defaultSorted.indexOf(defaultSorted[i])
@@ -54,8 +61,10 @@ function EmployeesTable(props) {
         }
     }
 
+    // Event change number Page button
     const handleNumberItemChanged = (e) => { setDefaultNumberItems(e.value)}
 
+    // Event change on search input 
     const handleSearchInputChanged = (e) => { 
         setValSearch(e.target.value)
         let tmpArray = []
@@ -75,6 +84,7 @@ function EmployeesTable(props) {
         setTmpEmployees(tmpArray)
     }
     
+    // event on table header click for sorting
     const handleSortTable = (e) => { 
         e.preventDefault()
         let eltClicked = e.target.id
@@ -82,26 +92,31 @@ function EmployeesTable(props) {
         setSortedBy(eltClicked.split('_')[1])
     }
 
+    // Event click view icon to launch the employee's profile
     const handleClickViewDetails = (e) => {
         e.preventDefault()
         navigate(`/employee/${e.target.id}`)
     }
 
+    // Event click on previous icon
     const handlePreviousClicked = () => {
         if((firstItem - parseInt(defaultNumberItems)) <= lenSortedEmployees) {
             setFirstItem(firstItem - parseInt(defaultNumberItems))
         }
     }
 
+    // Event click on next icon
     const handleNextClicked = () => {
         if((firstItem + parseInt(defaultNumberItems)) <= lenSortedEmployees) {
             setFirstItem(firstItem + parseInt(defaultNumberItems))
         }
     }
 
+    // Events click on start en end icon
     const handleStartClicked = () => { setFirstItem(0) }    
     const handleEndClicked = () => { setFirstItem(numberPages * parseInt(defaultNumberItems) - parseInt(defaultNumberItems)) }
 
+    // Event click on Page button
     const handlePageClicked = (e) => { setFirstItem(e.target.dataset.id * parseInt(defaultNumberItems) -  parseInt(defaultNumberItems) )} 
         
 

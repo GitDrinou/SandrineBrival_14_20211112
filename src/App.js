@@ -29,13 +29,12 @@ function App() {
          <div className="d-flex flex-column align-items-center w-100">
             <Header />
              <Routes>
-                 <Route exact path={ROUTE_HOME} element={<Home />}/>
-                 <Route exact path={ROUTE_DASHBOARD} element={<Dashboard />} />
-                 <Route exact path={ROUTE_NEW_EMPLOYEE} element={<NewEmployee />} />                 
-                 <Route exact path={ROUTE_EMPLOYEES} element={<Employees />} />
-                 <Route exact path={ROUTE_EMPLOYEE} element={<EmployeeDetails />} />
-             </Routes>
-            {/* <Footer /> */}
+                <Route exact path={ROUTE_HOME} element={<Home />}/>
+                <Route exact path={ROUTE_DASHBOARD} element={<Dashboard />} />
+                <Route exact path={ROUTE_NEW_EMPLOYEE} element={<NewEmployee />} />                 
+                <Route exact path={ROUTE_EMPLOYEES} element={<Employees />} />
+                <Route exact path={ROUTE_EMPLOYEE} element={<EmployeeDetails />} />
+              </Routes>
           </div> 
           
       </Router>
