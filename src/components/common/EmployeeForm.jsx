@@ -2,11 +2,11 @@ import ReactDatePicker from 'react-datepicker'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchDepartments, fetchStates, createEmployee, updateEmployee } from '../../store/slices/employeeSlice'
+import { fetchDepartments, fetchStates, createEmployee, updateEmployee, changeStatusUpdate } from '../../store/slices/employeeSlice'
 import Select from 'react-select'
-import { formatDataForSelect, modaleEvents, formatDate } from '../../utils/functions'
-import { ROUTE_DASHBOARD } from '../../utils/constants'
-import Modale from '../Modale'
+import { formatDataForSelect, formatDate } from '../../utils/functions'
+import { MODAL_DESC_CREATION, MODAL_DESC_UPDATE, MODAL_TITLE_CREATION, MODAL_TITLE_UPDATE, ROUTE_DASHBOARD, ROUTE_EMPLOYEES } from '../../utils/constants'
+import Modal from '../Modale'
 import "react-datepicker/dist/react-datepicker.css"
 import '../../sass/form.scss'
 
@@ -31,6 +31,7 @@ function EmployeeForm(props) {
     const [startDate, setStartDate] = useState('')
     const [selectedDepartment, setDepartment] = useState('')
     const [error, setError] = useState('')
+    const [viewModal, setViewModal] = useState(false)
     const [isViewMode, setIsViewMode] = useState(false)
     const [isUpdateMode, setIsUpdateMode] = useState(false)    
 
@@ -52,8 +53,10 @@ function EmployeeForm(props) {
         dispatch(fetchDepartments())
 
         // condition on create or update store status to call the modal events function
-        if ((creationStatus === "succeeded") || (updateStatus === "succeeded")) {        
-            modaleEvents(isUpdateMode, btnOpenModale, ROUTE_DASHBOARD)
+        if ((creationStatus === "succeeded") || (updateStatus === "succeeded")) {   
+            setViewModal(true)   
+            dispatch(changeStatusUpdate()) 
+            // modaleEvents(isUpdateMode, btnOpenModale, ROUTE_DASHBOARD)
         } else { setError(errorStatus) }
 
         // condition if we are in a view or update mode
@@ -114,7 +117,12 @@ function EmployeeForm(props) {
 
     return (
         <div className="form-wrapper js-page">            
-            <Modale />
+            <Modal  
+                viewModal={viewModal} 
+                dialogTitle = {isUpdateMode ? MODAL_TITLE_UPDATE : MODAL_TITLE_CREATION}
+                dialogDescription = {isUpdateMode ? MODAL_DESC_UPDATE : MODAL_DESC_CREATION} 
+                returnTo =  {isUpdateMode ? ROUTE_EMPLOYEES : ROUTE_DASHBOARD}
+            />
             {error ? <div className="col-12 mb-2 errorMsg">{error}</div> : null }
             <form id="frmEmployee" className="js-document">
                 <div className="row">

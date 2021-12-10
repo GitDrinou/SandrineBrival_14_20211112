@@ -125,7 +125,11 @@ export const updateEmployee = createAsyncThunk(
 const employeeSlice = createSlice ({
     name: 'employee',
     initialState,
-    reducers:{},
+    reducers:{
+        changeStatusUpdate(state) {
+            state.updateStatus = 'idle'
+        }
+    },
     extraReducers(builder){
         builder
             .addCase(fetchStates.pending, (state, action) => {
@@ -213,5 +217,7 @@ const employeeSlice = createSlice ({
     }
 })
 
+
+export const { changeStatusUpdate } = employeeSlice.actions
 
 export default employeeSlice.reducer

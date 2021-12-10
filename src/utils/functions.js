@@ -16,47 +16,47 @@ export const formatDataForSelect = (arr) =>  {
     return newTable
 }
 
-/**
- * Function : Modale Events
- * @param {boolean} isUpdate 
- * @param {DOMElement} elt 
- * @param {URL} url_return 
- */
-export function modaleEvents(isUpdate, elt, url_return) {
+// /**
+//  * Function : Modale Events
+//  * @param {boolean} isUpdate 
+//  * @param {DOMElement} elt 
+//  * @param {URL} url_return 
+//  */
+// export function modaleEvents(isUpdate, elt, url_return) {
 
-    const origin = window.location.origin
+//     const origin = window.location.origin
 
-    const doc = document.querySelector('.js-document')
+//     const doc = document.querySelector('.js-document')
 
-    if (isUpdate) { 
-        document.getElementById('dialog-title').innerHTML = "Employee updated"
-        document.getElementById('dialog-desc').innerHTML = "This employee is successfully updated on your database"
-    }
+//     if (isUpdate) { 
+//         document.getElementById('dialog-title').innerHTML = "Employee updated"
+//         document.getElementById('dialog-desc').innerHTML = "This employee is successfully updated on your database"
+//     }
 
-    const open = (dialog) => {
-        dialog.setAttribute('aria-hidden', false)        
-        doc.setAttribute('aria-hidden', true)
-    }
+//     const open = (dialog) => {
+//         dialog.setAttribute('aria-hidden', false)        
+//         doc.setAttribute('aria-hidden', true)
+//     }
 
-    const close = (dialog) => {
-        window.location.assign(origin.concat(url_return))
-        dialog.setAttribute('aria-hidden', true)        
-        doc.setAttribute('aria-hidden', false) 
-    }
+//     const close = (dialog) => {
+//         window.location.assign(origin.concat(url_return))
+//         dialog.setAttribute('aria-hidden', true)        
+//         doc.setAttribute('aria-hidden', false) 
+//     }
 
-    const dialog = document.getElementById(elt.getAttribute('aria-controls'))        
-    const dismissTriggers = dialog.querySelectorAll('[data-dismiss]')
+//     const dialog = document.getElementById(elt.getAttribute('aria-controls'))        
+//     const dismissTriggers = dialog.querySelectorAll('[data-dismiss]')
     
-    open(dialog)
+//     open(dialog)
     
-    dismissTriggers.forEach((dismissTrigger) => {
-        const dismissDialog = document.getElementById(dismissTrigger.dataset.dismiss)
-        dismissTrigger.addEventListener('click', (e) => {
-            e.preventDefault()
-            close(dismissDialog)
-        })
-    })
-}
+//     dismissTriggers.forEach((dismissTrigger) => {
+//         const dismissDialog = document.getElementById(dismissTrigger.dataset.dismiss)
+//         dismissTrigger.addEventListener('click', (e) => {
+//             e.preventDefault()
+//             close(dismissDialog)
+//         })
+//     })
+// }
 
 /**
  * Function  : format Date

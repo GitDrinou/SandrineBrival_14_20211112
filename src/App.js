@@ -35,8 +35,7 @@ function App() {
                 <Route exact path={ROUTE_EMPLOYEES} element={<Employees />} />
                 <Route exact path={ROUTE_EMPLOYEE} element={<EmployeeDetails />} />
               </Routes>
-          </div> 
-          
+          </div>           
       </Router>
   )
 }
