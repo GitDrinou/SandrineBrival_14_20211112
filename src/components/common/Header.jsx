@@ -1,12 +1,11 @@
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import LogoIllustration from '../../assets/Logo_WealthHealth.svg'
 import { localHRKey, localHRRemember, ROUTE_HOME } from '../../utils/constants'
-import '../../sass/header.scss'
 import { logOut } from '../../store/slices/loginSlice'
-import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
+import '../../sass/header.scss'
 
 /**
  * Component function : Header
@@ -43,7 +42,7 @@ function Header() {
         <header className="container h-100">
             <div className="row logoContainer">
                 <div className="col-12 w-100 p-3 d-flex flex-row">
-                    <img src={LogoIllustration} alt="Wealth Health Logo" />
+                    <img src={LogoIllustration} alt="Wealth Health Logo" width={auto} height={auto}/>
                     <h1 className="my-auto text-center mx-3">HRnet</h1>                        
                 </div>
             </div> 

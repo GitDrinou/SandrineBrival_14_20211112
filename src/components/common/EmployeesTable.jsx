@@ -1,9 +1,10 @@
+import React, { useState } from 'react'
 import { formatDate, sortedDatas } from '../../utils/functions'
-import '../../sass/employees.scss'
-import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import Select from 'react-select'
 import { numberOfItems } from '../../utils/constants'
+import '../../sass/employees.scss'
+
+import Select from 'react-select'
 
 /**
  * Component function : Employee Table
@@ -121,7 +122,7 @@ function EmployeesTable(props) {
         
 
     return (
-        <div>            
+        <>            
             <div className="row">
                 <div className="col-4 mt-3 mb-3 d-flex">
                     <span className="pe-2 my-auto">Show</span>
@@ -197,8 +198,7 @@ function EmployeesTable(props) {
                     <span className="my-auto" onClick={handleEndClicked}><i className="fas fa-step-forward"></i></span>
                 </div>
             </div>    
-        </div>
-        
+        </>        
     )
 }
 

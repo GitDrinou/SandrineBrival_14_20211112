@@ -1,14 +1,15 @@
-import { useEffect } from "react"
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router"
-import EmployeesTable from "../components/common/EmployeesTable"
 import { fetchEmployees } from "../store/slices/employeeSlice"
 import '../sass/employees.scss'
+
+import EmployeesTable from '../components/common/EmployeesTable'
 
 /**
  * Component function : Employees List
  * @returns employees list
- */
+*/
 function EmployeesList() {
 
     const dispatch = useDispatch()
@@ -28,7 +29,6 @@ function EmployeesList() {
                         <i className="fas fa-angle-left" title="Go to dashboard"></i>
                         return
                     </span>
-                    
                 </div>
             </div>
             <div className="row">

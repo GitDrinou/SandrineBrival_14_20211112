@@ -1,9 +1,9 @@
-import '../sass/login.scss'
-import { useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLogin } from '../store/slices/loginSlice'
 import { localHRKey, localHRRemember, ROUTE_DASHBOARD } from '../utils/constants'
 import { useNavigate } from 'react-router'
+import '../sass/login.scss'
 
 /**
  * Component function : Login

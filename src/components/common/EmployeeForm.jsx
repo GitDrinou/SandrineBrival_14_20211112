@@ -1,14 +1,14 @@
-import ReactDatePicker from 'react-datepicker'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchDepartments, fetchStates, createEmployee, updateEmployee, changeStatusUpdate } from '../../store/slices/employeeSlice'
-import Select from 'react-select'
 import { formatDataForSelect, formatDate } from '../../utils/functions'
 import { MODAL_DESC_CREATION, MODAL_DESC_UPDATE, MODAL_TITLE_CREATION, MODAL_TITLE_UPDATE, ROUTE_DASHBOARD, ROUTE_EMPLOYEES } from '../../utils/constants'
-import Modal from 'modal-styled-react'
 import "react-datepicker/dist/react-datepicker.css"
 import '../../sass/form.scss'
+
+import ReactDatePicker from 'react-datepicker'
+import Select from 'react-select'
+import Modal from 'modal-styled-react'
 
 /**
  * Component function : Employee Form

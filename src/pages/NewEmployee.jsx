@@ -1,6 +1,8 @@
-import '../sass/form.scss'
-import EmployeeForm from "../components/common/EmployeeForm"
+import React from 'react'
 import { useNavigate } from 'react-router'
+import '../sass/form.scss'
+
+import EmployeeForm from '../components/common/EmployeeForm'
 
 /**
  * Component function : New employee

@@ -1,9 +1,9 @@
-import { useEffect } from "react"
-import { } from "react-redux"
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector} from "react-redux"
 import { useNavigate, useParams } from "react-router"
 import { fetchEmployee } from "../store/slices/employeeSlice"
-import EmployeeForm from "./common/EmployeeForm"
+
+import EmployeeForm from './common/EmployeeForm'
 
 /**
  * Component function : Employee Details
