@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLogin } from '../store/slices/loginSlice'
 import { localHRKey, localHRRemember, ROUTE_DASHBOARD } from '../utils/constants'
 import { useNavigate } from 'react-router'
-import '../sass/login.scss'
+import '../css/login.css'
+
 
 /**
  * Component function : Login
@@ -76,28 +77,31 @@ function Login() {
     
 
     return (
-        <div className="card-body bg-secondary loginForm">
-            <i className="fas fa-user-shield sign-in-icon card-body"></i>
-             <span className="loginTitle">Sign In</span>            
-            <p>Please enter your admin credentials : </p>
-            <form>
-                {errorMessage}
-                <div className="form-group mb-2">
-                    <label htmlFor="emailUser">E-mail</label>
-                    <input type="email" id="emailUser" className="form-control" value={!userEmail ? email : userEmail} onChange={onEmailChanged} placeholder="Enter your email" required />
+        <>
+            
+                <div className="card-body bg-secondary loginForm">
+                    <i className="fas fa-user-shield sign-in-icon card-body"></i>
+                    <span className="loginTitle">Sign In</span>            
+                    <p>Please enter your admin credentials : </p>
+                    <form>
+                        {errorMessage}
+                        <div className="form-group mb-2">
+                            <label htmlFor="emailUser">E-mail</label>
+                            <input type="email" id="emailUser" className="form-control" value={!userEmail ? email : userEmail} onChange={onEmailChanged} placeholder="Enter your email" required />
+                        </div>
+                        <div className="form-group mb-2">
+                            <label htmlFor="passwordUser">Password</label>
+                            <input type="password" id="passwordUser" className="form-control" value={!userPassword ? password : userPassword} onChange={onPasswordChanged}placeholder="Enter your password" required />
+                        </div>
+                        <div className="form-check  mt-4">
+                            <input type="checkbox" className="form-check-input" id="rememberMe" checked={rememberCheck ? true : false} onChange={onRememberChanged} />
+                            <label className="form-check-label" htmlFor="rememberMe">Remember credentials</label>
+                        </div>
+                        <button type="button" className="btn btn-dark mt-4 btnSignIn" onClick={onSubmitClicked}>Submit</button>
+                    </form>
                 </div>
-                <div className="form-group mb-2">
-                    <label htmlFor="passwordUser">Password</label>
-                    <input type="password" id="passwordUser" className="form-control" value={!userPassword ? password : userPassword} onChange={onPasswordChanged}placeholder="Enter your password" required />
-                </div>
-                <div className="form-check  mt-4">
-                    <input type="checkbox" className="form-check-input" id="rememberMe" checked={rememberCheck ? true : false} onChange={onRememberChanged} />
-                    <label className="form-check-label" htmlFor="rememberMe">Remember credentials</label>
-                </div>
-                <button type="button" className="btn btn-dark mt-4 btnSignIn" onClick={onSubmitClicked}>Submit</button>
-            </form>
-        </div>
-    )
+        </>
+    )    
 }
 
 export default Login

@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from 'react'
-import './sass/main.scss'
+import React from 'react'
+import './css/main.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { localHRKey, ROUTE_DASHBOARD, ROUTE_EMPLOYEE, ROUTE_EMPLOYEES, ROUTE_HOME, ROUTE_NEW_EMPLOYEE } from './utils/constants'
 import { useEffect } from 'react'

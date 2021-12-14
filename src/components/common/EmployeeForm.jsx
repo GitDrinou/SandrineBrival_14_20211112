@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchDepartments, fetchStates, createEmployee, updateEmployee, changeStatusUpdate } from '../../store/slices/employeeSlice'
 import { formatDataForSelect, formatDate } from '../../utils/functions'
 import { MODAL_DESC_CREATION, MODAL_DESC_UPDATE, MODAL_TITLE_CREATION, MODAL_TITLE_UPDATE, ROUTE_DASHBOARD, ROUTE_EMPLOYEES } from '../../utils/constants'
 import "react-datepicker/dist/react-datepicker.css"
-import '../../sass/form.scss'
+import '../../css/form.css'
 
 import ReactDatePicker from 'react-datepicker'
 import Select from 'react-select'
@@ -117,8 +117,6 @@ function EmployeeForm(props) {
 
     return (
         <>
-            
-            
             <div className="form-wrapper">
                 <div className="row d-flex justify-content-center w-100">
                     <Modal  

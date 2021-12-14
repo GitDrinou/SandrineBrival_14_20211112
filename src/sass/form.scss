@@ -3,12 +3,11 @@ $enable-grid-classes: "off";
 .newemployee--header {
     display: flex;
     flex-direction: row;
-
     & > i {
         font-size: 1.6rem;
         margin-right: 15px;
         color: #5A7002;
-    }
+    } 
 }
 
 .form-wrapper {

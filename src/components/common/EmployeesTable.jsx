@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { formatDate, sortedDatas } from '../../utils/functions'
 import { useNavigate } from 'react-router'
 import { numberOfItems } from '../../utils/constants'
-import '../../sass/employees.scss'
+import '../../css/employees.css'
 
 import Select from 'react-select'
 

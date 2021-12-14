@@ -25,3 +25,13 @@
     background-color: red;
     font-size: 0.8rem;
 }
+
+
+@media (max-width:720px) {
+    .sign-in-icon {      
+        font-size: 2rem;
+    }
+    .loginTitle {
+        font-size: 1.3rem;
+    }
+}

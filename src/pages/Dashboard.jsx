@@ -1,7 +1,6 @@
-import React from 'react'
 import { dashboardItems } from '../utils/dashboardItems'
 import { Link } from 'react-router-dom'
-import '../sass/dashboard.scss'
+import '../css/dashboard.css'
 
 /**
  * Component function : Dashboard
