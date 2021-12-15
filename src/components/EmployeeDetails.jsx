@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector} from "react-redux"
-import { useNavigate, useParams } from "react-router"
+import { useParams } from "react-router"
 import { fetchEmployee } from "../store/slices/employeeSlice"
 
 import EmployeeForm from './common/EmployeeForm'
@@ -14,7 +14,6 @@ function EmployeeDetails() {
     // constants
     const idEmployee = useParams()
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     // on page load
     useEffect(() => {
