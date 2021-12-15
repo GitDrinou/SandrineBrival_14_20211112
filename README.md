@@ -21,10 +21,12 @@ If you are working with several versions of NodeJS, we recommend you install [nv
 
 ```
 npm install
-...
+
+```
 
 Now let's start the application : 
 
 ```
 npm start
-...
+
+```
